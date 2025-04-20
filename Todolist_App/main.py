@@ -30,11 +30,17 @@ def update_task():
     })
     print(response.json()["message"])
     
-    
+
 def check_task_status():
-    task_id = input("Enter ID task need to check:")
+    task_id = input("Enter ID task need to check: ")
     response = requests.put(f"{API_URL}/{task_id}/complete")
-    print(response.json().get("message"))  
+    
+    if response.status_code == 200:
+        print(response.json().get("message"))
+    else:
+        print(f"Error: Task with ID {task_id} not found.")    
+    
+    
     
     
 def delete_task_by_id():
